@@ -93,7 +93,7 @@
       }
     }
 
-    .corazon {
+    .corazon, .petalo {
       position: absolute;
       width: 20px;
       height: 20px;
@@ -123,6 +123,14 @@
       top: 0;
     }
 
+    .petalo {
+      background: pink;
+      border-radius: 50%;
+      transform: rotate(20deg);
+      width: 14px;
+      height: 18px;
+    }
+
     @keyframes flotar {
       0% {
         bottom: -50px;
@@ -142,14 +150,28 @@
   </style>
 </head>
 <body>
+  <audio autoplay loop volume="0.2">
+    <source src="musica.mp3" type="audio/mpeg">
+    Tu navegador no soporta el audio HTML5.
+  </audio>
+
   <script>
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 15; i++) {
       const heart = document.createElement('div');
       heart.classList.add('corazon');
       heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+      heart.style.animationDuration = (6 + Math.random() * 5) + 's';
       heart.style.opacity = Math.random();
       document.body.appendChild(heart);
+    }
+
+    for (let i = 0; i < 15; i++) {
+      const petal = document.createElement('div');
+      petal.classList.add('petalo');
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.animationDuration = (6 + Math.random() * 4) + 's';
+      petal.style.opacity = Math.random();
+      document.body.appendChild(petal);
     }
   </script>
 
