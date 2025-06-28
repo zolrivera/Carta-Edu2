@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,7 +14,7 @@
     }
 
     .carta {
-      max-width: 700px;
+      max-width: 800px;
       margin: 80px auto;
       background: #fff;
       padding: 50px 40px;
@@ -69,31 +68,44 @@
       background-color: #c2185b;
     }
 
-    .regalo {
-      margin-top: 30px;
+    .carousel {
       display: none;
-      animation: zoomIn 1s ease;
+      position: relative;
+      margin-top: 30px;
+      width: 100%;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .regalo img {
-      max-width: 90%;
-      border-radius: 20px;
-      margin: 10px auto;
+    .carousel img {
+      width: 100%;
+      border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      transition: opacity 1s ease-in-out;
     }
 
-    @keyframes zoomIn {
-      0% {
-        transform: scale(0.2);
-        opacity: 0;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
+    .carousel .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 30px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      padding: 5px 12px;
+      cursor: pointer;
+      user-select: none;
     }
 
-    .corazon {
+    .carousel .arrow.left {
+      left: -40px;
+    }
+
+    .carousel .arrow.right {
+      right: -40px;
+    }
+
+    .corazon, .petalo {
       position: absolute;
       width: 20px;
       height: 20px;
@@ -123,6 +135,14 @@
       top: 0;
     }
 
+    .petalo {
+      background: pink;
+      border-radius: 50%;
+      transform: rotate(20deg);
+      width: 14px;
+      height: 18px;
+    }
+
     @keyframes flotar {
       0% {
         bottom: -50px;
@@ -142,38 +162,68 @@
   </style>
 </head>
 <body>
+  <audio autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg">
+    Tu navegador no soporta el audio HTML5.
+  </audio>
+
   <script>
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 15; i++) {
       const heart = document.createElement('div');
       heart.classList.add('corazon');
       heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+      heart.style.animationDuration = (6 + Math.random() * 5) + 's';
       heart.style.opacity = Math.random();
       document.body.appendChild(heart);
+    }
+
+    for (let i = 0; i < 15; i++) {
+      const petal = document.createElement('div');
+      petal.classList.add('petalo');
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.animationDuration = (6 + Math.random() * 4) + 's';
+      petal.style.opacity = Math.random();
+      document.body.appendChild(petal);
     }
   </script>
 
   <div class="carta">
     <h1>¡Feliz Cumpleaños, Amor! 🎉❤️</h1>
     <p>
-      Hoy es un día especial porque celebramos tu existencia. Gracias por hacer mi mundo más bonito. 💕
+      Hoy celebramos tu vida, tu sonrisa y todo lo hermoso que eres para mí. Gracias por ser tú. 💕
     </p>
     <p class="firma">
-      Con amor,<br>Tu persona favorita 😘
+      Con todo mi amor,<br>Tu persona favorita 😘
     </p>
 
-    <button class="boton" onclick="mostrarRegalo()">Ver tu regalo 🎁</button>
+    <button class="boton" onclick="mostrarCarrusel()">Ver tu regalo 🎁</button>
 
-    <div class="regalo" id="regalo">
-      <img src="IMG_20230628_211452.jpg" alt="Foto juntos">
-      <img src="IMG_20230628_211402.jpg" alt="Foto del cumpleañero con la torta">
+    <div class="carousel" id="carousel">
+      <span class="arrow left" onclick="mover(-1)">❮</span>
+      <img id="slide" src="IMG_20230628_211452.jpg" alt="foto">
+      <span class="arrow right" onclick="mover(1)">❯</span>
     </div>
   </div>
 
   <script>
-    function mostrarRegalo() {
-      document.getElementById("regalo").style.display = "block";
+    const imagenes = [
+      "IMG_20230628_211452.jpg",
+      "IMG_20230628_211402.jpg",
+      "IMG-20230101-WA0032.jpg",
+      "IMG_20230319_154801.jpg",
+      "IMG-20210214-WA0037.jpg"
+    ];
+    let indice = 0;
+
+    function mostrarCarrusel() {
+      document.getElementById("carousel").style.display = "block";
+    }
+
+    function mover(direccion) {
+      indice = (indice + direccion + imagenes.length) % imagenes.length;
+      document.getElementById("slide").src = imagenes[indice];
     }
   </script>
 </body>
 </html>
+
