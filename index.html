@@ -139,6 +139,32 @@
         transform: translateX(-30px) rotate(45deg);
       }
     }
+
+    /* Pie de página */
+    .footer {
+      text-align: center;
+      padding: 25px;
+      font-size: 1.2em;
+      color: #fff;
+      font-style: italic;
+      background: linear-gradient(90deg, #f06292, #f48fb1);
+      margin-top: 60px;
+      animation: fadeIn 3s ease-in-out;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
@@ -149,28 +175,5 @@
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Efecto corazones -->
+  <!-- Corazones flotando -->
   <script>
-    for (let i = 0; i < 25; i++) {
-      const heart = document.createElement('div');
-      heart.classList.add('corazon');
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (5 + Math.random() * 6) + 's';
-      heart.style.opacity = Math.random();
-      document.body.appendChild(heart);
-    }
-  </script>
-
-  <!-- Carta -->
-  <div class="carta">
-    <h1>¡Feliz Cumpleaños, Amor! 🎉❤️</h1>
-    <p>Hoy celebramos tu vida, tu sonrisa y todo lo hermoso que eres para mí. Gracias por estar en mi mundo. 💕</p>
-    <p class="firma">Con todo mi amor,<br>Tu persona favorita 😘</p>
-
-    <div class="galeria">
-      <img src="IMG_20230628_211452.jpg" alt="Foto 1">
-      <img src="IMG_20230628_211402.jpg" alt="Foto 2">
-    </div>
-  </div>
-</body>
-</html>
