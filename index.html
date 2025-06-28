@@ -52,8 +52,8 @@
       color: #d81b60;
     }
 
-    .boton {
-      margin-top: 30px;
+    .boton, .musica-btn {
+      margin-top: 20px;
       background-color: #e91e63;
       color: white;
       border: none;
@@ -64,164 +64,73 @@
       transition: background 0.3s;
     }
 
-    .boton:hover {
+    .boton:hover, .musica-btn:hover {
       background-color: #c2185b;
     }
 
-    .carousel {
+    .galeria {
       display: none;
-      position: relative;
       margin-top: 30px;
-      width: 100%;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+      animation: zoomIn 1s ease;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
     }
 
-    .carousel img {
-      width: 100%;
+    .galeria img {
+      width: 230px;
+      height: auto;
       border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-      transition: opacity 1s ease-in-out;
+      transition: transform 0.3s;
     }
 
-    .carousel .arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 30px;
-      background: rgba(255, 255, 255, 0.7);
-      border-radius: 50%;
-      padding: 5px 12px;
-      cursor: pointer;
-      user-select: none;
+    .galeria img:hover {
+      transform: scale(1.05);
     }
 
-    .carousel .arrow.left {
-      left: -40px;
-    }
-
-    .carousel .arrow.right {
-      right: -40px;
-    }
-
-    .corazon, .petalo {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: red;
-      transform: rotate(45deg);
-      animation: flotar 10s infinite ease-in;
-      z-index: 1;
-    }
-
-    .corazon::before,
-    .corazon::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: red;
-      border-radius: 50%;
-    }
-
-    .corazon::before {
-      top: -10px;
-      left: 0;
-    }
-
-    .corazon::after {
-      left: -10px;
-      top: 0;
-    }
-
-    .petalo {
-      background: pink;
-      border-radius: 50%;
-      transform: rotate(20deg);
-      width: 14px;
-      height: 18px;
-    }
-
-    @keyframes flotar {
+    @keyframes zoomIn {
       0% {
-        bottom: -50px;
+        transform: scale(0.2);
         opacity: 0;
-        transform: translateX(0) rotate(45deg);
-      }
-      50% {
-        opacity: 1;
-        transform: translateX(30px) rotate(45deg);
       }
       100% {
-        bottom: 100%;
-        opacity: 0;
-        transform: translateX(-30px) rotate(45deg);
+        transform: scale(1);
+        opacity: 1;
       }
     }
   </style>
 </head>
 <body>
-  <audio autoplay loop>
+
+  <!-- AUDIO -->
+  <button class="musica-btn" onclick="document.getElementById('audio').play()">🎵 Reproducir Música</button>
+  <audio id="audio" loop>
     <source src="musica.mp3" type="audio/mpeg">
-    Tu navegador no soporta el audio HTML5.
+    Tu navegador no soporta audio HTML5.
   </audio>
 
-  <script>
-    for (let i = 0; i < 15; i++) {
-      const heart = document.createElement('div');
-      heart.classList.add('corazon');
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (6 + Math.random() * 5) + 's';
-      heart.style.opacity = Math.random();
-      document.body.appendChild(heart);
-    }
-
-    for (let i = 0; i < 15; i++) {
-      const petal = document.createElement('div');
-      petal.classList.add('petalo');
-      petal.style.left = Math.random() * 100 + 'vw';
-      petal.style.animationDuration = (6 + Math.random() * 4) + 's';
-      petal.style.opacity = Math.random();
-      document.body.appendChild(petal);
-    }
-  </script>
-
+  <!-- CARTA -->
   <div class="carta">
     <h1>¡Feliz Cumpleaños, Amor! 🎉❤️</h1>
-    <p>
-      Hoy celebramos tu vida, tu sonrisa y todo lo hermoso que eres para mí. Gracias por ser tú. 💕
-    </p>
-    <p class="firma">
-      Con todo mi amor,<br>Tu persona favorita 😘
-    </p>
+    <p>Hoy celebramos tu vida, tu sonrisa y todo lo hermoso que eres para mí. Gracias por ser tú. 💕</p>
+    <p class="firma">Con todo mi amor,<br>Tu persona favorita 😘</p>
 
-    <button class="boton" onclick="mostrarCarrusel()">Ver tu regalo 🎁</button>
+    <button class="boton" onclick="mostrarGaleria()">Ver tu regalo 🎁</button>
 
-    <div class="carousel" id="carousel">
-      <span class="arrow left" onclick="mover(-1)">❮</span>
-      <img id="slide" src="IMG_20230628_211452.jpg" alt="foto">
-      <span class="arrow right" onclick="mover(1)">❯</span>
+    <div class="galeria" id="galeria">
+      <img src="IMG_20230628_211452.jpg" alt="Foto 1">
+      <img src="IMG_20230628_211402.jpg" alt="Foto 2">
+      <img src="IMG-20230101-WA0032.jpg" alt="Foto 3">
+      <img src="IMG_20230319_154801.jpg" alt="Foto 4">
+      <img src="IMG-20210214-WA0037.jpg" alt="Foto 5">
     </div>
   </div>
 
   <script>
-    const imagenes = [
-      "IMG_20230628_211452.jpg",
-      "IMG_20230628_211402.jpg",
-      "IMG-20230101-WA0032.jpg",
-      "IMG_20230319_154801.jpg",
-      "IMG-20210214-WA0037.jpg"
-    ];
-    let indice = 0;
-
-    function mostrarCarrusel() {
-      document.getElementById("carousel").style.display = "block";
-    }
-
-    function mover(direccion) {
-      indice = (indice + direccion + imagenes.length) % imagenes.length;
-      document.getElementById("slide").src = imagenes[indice];
+    function mostrarGaleria() {
+      document.getElementById("galeria").style.display = "flex";
     }
   </script>
 </body>
