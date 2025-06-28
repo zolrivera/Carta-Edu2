@@ -4,14 +4,15 @@
   <meta charset="UTF-8">
   <title>Feliz Cumpleaños, Amor</title>
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       font-family: 'Georgia', serif;
-      overflow: hidden;
+      height: 100%;
       background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
       background-size: 400% 400%;
       animation: fondoMovimiento 15s ease infinite;
+      overflow-x: hidden;
     }
 
     @keyframes fondoMovimiento {
@@ -20,18 +21,28 @@
       100% { background-position: 0% 50%; }
     }
 
+    .contenedor {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 20px 100px;
+      box-sizing: border-box;
+    }
+
     .carta {
-      max-width: 700px;
-      margin: 70px auto;
       background: rgba(255, 255, 255, 0.95);
       padding: 40px 30px;
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       text-align: center;
-      position: relative;
-      z-index: 10;
       animation: aparecer 2s ease forwards;
       opacity: 0;
+      max-width: 700px;
+      width: 100%;
+      position: relative;
+      z-index: 10;
     }
 
     @keyframes aparecer {
@@ -169,7 +180,7 @@
 </head>
 <body>
 
-  <!-- Música -->
+  <!-- Botón música -->
   <button class="musica-btn" onclick="document.getElementById('audio').play()">🎵 Reproducir Música</button>
   <audio id="audio" loop>
     <source src="musica.mp3" type="audio/mpeg">
@@ -187,15 +198,17 @@
     }
   </script>
 
-  <!-- Carta -->
-  <div class="carta">
-    <h1>¡Feliz Cumpleaños, Amor! 🎉❤️</h1>
-    <p>Hoy celebramos tu vida, tu sonrisa y todo lo hermoso que eres para mí. Gracias por estar en mi mundo. 💕</p>
-    <p class="firma">Con todo mi amor,<br>Tu persona favorita 😘</p>
+  <!-- Contenido principal -->
+  <div class="contenedor">
+    <div class="carta">
+      <h1>¡Feliz Cumpleaños, Amor! 🎉❤️</h1>
+      <p>Hoy celebramos tu vida, tu sonrisa y todo lo hermoso que eres para mí. Gracias por estar en mi mundo. 💕</p>
+      <p class="firma">Con todo mi amor,<br>Tu persona favorita 😘</p>
 
-    <div class="galeria">
-      <img src="IMG_20230628_211452.jpg" alt="Foto 1">
-      <img src="IMG_20230628_211402.jpg" alt="Foto 2">
+      <div class="galeria">
+        <img src="IMG_20230628_211452.jpg" alt="Foto 1">
+        <img src="IMG_20230628_211402.jpg" alt="Foto 2">
+      </div>
     </div>
   </div>
 
