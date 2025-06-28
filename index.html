@@ -7,24 +7,31 @@
     body {
       margin: 0;
       padding: 0;
-      background: radial-gradient(circle at top, #ffd1dc 0%, #ffb6c1 100%);
       font-family: 'Georgia', serif;
-      overflow-x: hidden;
-      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+      background-size: 400% 400%;
+      animation: fondoMovimiento 15s ease infinite;
+    }
+
+    @keyframes fondoMovimiento {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .carta {
-      max-width: 800px;
-      margin: 80px auto;
-      background: #fff;
-      padding: 50px 40px;
+      max-width: 700px;
+      margin: 70px auto;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px 30px;
       border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       text-align: center;
+      position: relative;
+      z-index: 10;
       animation: aparecer 2s ease forwards;
       opacity: 0;
-      transform: scale(0.9);
-      z-index: 10;
     }
 
     @keyframes aparecer {
@@ -35,101 +42,135 @@
     }
 
     h1 {
-      font-size: 2.8em;
+      font-size: 2.5em;
       color: #e91e63;
-      margin-bottom: 15px;
     }
 
     p {
-      font-size: 1.3em;
-      color: #444;
-      line-height: 1.6;
+      font-size: 1.2em;
+      color: #333;
     }
 
     .firma {
-      margin-top: 40px;
+      margin-top: 30px;
       font-style: italic;
       color: #d81b60;
     }
 
-    .boton, .musica-btn {
+    .musica-btn {
       margin-top: 20px;
       background-color: #e91e63;
       color: white;
       border: none;
-      padding: 12px 24px;
-      font-size: 1.1em;
-      border-radius: 30px;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 25px;
       cursor: pointer;
       transition: background 0.3s;
     }
 
-    .boton:hover, .musica-btn:hover {
+    .musica-btn:hover {
       background-color: #c2185b;
     }
 
     .galeria {
-      display: none;
       margin-top: 30px;
-      animation: zoomIn 1s ease;
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
+      flex-wrap: wrap;
     }
 
     .galeria img {
-      width: 230px;
-      height: auto;
+      width: 250px;
       border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-      transition: transform 0.3s;
+      transition: transform 0.3s ease;
     }
 
     .galeria img:hover {
-      transform: scale(1.05);
+      transform: scale(1.07);
     }
 
-    @keyframes zoomIn {
+    /* Corazones flotando */
+    .corazon {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: flotar 10s infinite ease-in;
+      z-index: 1;
+    }
+
+    .corazon::before,
+    .corazon::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .corazon::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .corazon::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes flotar {
       0% {
-        transform: scale(0.2);
+        bottom: -50px;
         opacity: 0;
+        transform: translateX(0) rotate(45deg);
+      }
+      50% {
+        opacity: 1;
+        transform: translateX(30px) rotate(45deg);
       }
       100% {
-        transform: scale(1);
-        opacity: 1;
+        bottom: 100%;
+        opacity: 0;
+        transform: translateX(-30px) rotate(45deg);
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- AUDIO -->
+  <!-- Música -->
   <button class="musica-btn" onclick="document.getElementById('audio').play()">🎵 Reproducir Música</button>
   <audio id="audio" loop>
     <source src="musica.mp3" type="audio/mpeg">
-    Tu navegador no soporta audio HTML5.
   </audio>
 
-  <!-- CARTA -->
-  <div class="carta">
-    <h1>¡Feliz Cumpleaños, Amor! 🎉❤️</h1>
-    <p>Hoy celebramos tu vida, tu sonrisa y todo lo hermoso que eres para mí. Gracias por ser tú. 💕</p>
-    <p class="firma">Con todo mi amor,<br>Tu persona favorita 😘</p>
-
-    <button class="boton" onclick="mostrarGaleria()">Ver tu regalo 🎁</button>
-
-    <div class="galeria" id="galeria">
-      <img src="IMG_20230628_211452.jpg" alt="Foto 1">
-      <img src="IMG_20230628_211402.jpg" alt="Foto 2">
-
-    </div>
-  </div>
-
+  <!-- Efecto corazones -->
   <script>
-    function mostrarGaleria() {
-      document.getElementById("galeria").style.display = "flex";
+    for (let i = 0; i < 25; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('corazon');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (5 + Math.random() * 6) + 's';
+      heart.style.opacity = Math.random();
+      document.body.appendChild(heart);
     }
   </script>
+
+  <!-- Carta -->
+  <div class="carta">
+    <h1>¡Feliz Cumpleaños, Amor! 🎉❤️</h1>
+    <p>Hoy celebramos tu vida, tu sonrisa y todo lo hermoso que eres para mí. Gracias por estar en mi mundo. 💕</p>
+    <p class="firma">Con todo mi amor,<br>Tu persona favorita 😘</p>
+
+    <div class="galeria">
+      <img src="IMG_20230628_211452.jpg" alt="Foto 1">
+      <img src="IMG_20230628_211402.jpg" alt="Foto 2">
+    </div>
+  </div>
 </body>
 </html>
